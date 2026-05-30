@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduBot — AI College FAQ Assistant</title>
+  <meta name="description" content="AI-powered chatbot for college FAQs — admissions, courses, fees, exams, and more." />
+  <link rel="stylesheet" href="src/styles/main.css" />
+  <link rel="stylesheet" href="src/styles/chat.css" />
+  <link rel="stylesheet" href="src/styles/sidebar.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+</head>
+<body>
+  <div id="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon"><i class="ti ti-school"></i></div>
+          <div class="logo-text">
+            <span class="logo-name">EduBot</span>
+            <span class="logo-tagline">Campus Assistant</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <p class="nav-label">Topics</p>
+        <button class="nav-btn active" data-topic="general">
+          <i class="ti ti-home"></i> General
+        </button>
+        <button class="nav-btn" data-topic="admissions">
+          <i class="ti ti-file-text"></i> Admissions
+        </button>
+        <button class="nav-btn" data-topic="courses">
+          <i class="ti ti-book"></i> Courses
+        </button>
+        <button class="nav-btn" data-topic="fees">
+          <i class="ti ti-credit-card"></i> Fees &amp; Finance
+        </button>
+        <button class="nav-btn" data-topic="exams">
+          <i class="ti ti-clipboard-check"></i> Exams
+        </button>
+        <button class="nav-btn" data-topic="facilities">
+          <i class="ti ti-building"></i> Facilities
+        </button>
+        <button class="nav-btn" data-topic="hostel">
+          <i class="ti ti-bed"></i> Hostel
+        </button>
+        <button class="nav-btn" data-topic="placements">
+          <i class="ti ti-briefcase"></i> Placements
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="stats-row">
+          <div class="stat">
+            <span class="stat-num" id="questionCount">0</span>
+            <span class="stat-label">Questions</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num" id="topicCount">8</span>
+            <span class="stat-label">Topics</span>
+          </div>
+        </div>
+        <button class="clear-btn" id="clearBtn">
+          <i class="ti ti-trash"></i> Clear Chat
+        </button>
+      </div>
+    </aside>
+
+    <main class="chat-container">
+      <header class="chat-header">
+        <button class="mobile-menu-btn" id="menuBtn" aria-label="Open menu">
+          <i class="ti ti-menu-2"></i>
+        </button>
+        <div class="header-agent">
+          <div class="agent-avatar">
+            <i class="ti ti-robot"></i>
+            <span class="online-dot"></span>
+          </div>
+          <div class="agent-info">
+            <span class="agent-name">Campus Advisor</span>
+            <span class="agent-status">AI-powered · Always available</span>
+          </div>
+        </div>
+        <div class="header-controls">
+          <select id="languageSelect" class="lang-select" aria-label="Select language">
+            <option value="en">🌐 English</option>
+            <option value="hi">🇮🇳 हिंदी</option>
+            <option value="te">🇮🇳 తెలుగు</option>
+            <option value="ta">🇮🇳 தமிழ்</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="de">🇩🇪 Deutsch</option>
+          </select>
+          <select id="collegeSelect"> <option value="sacet"> SACET </option> <option value="jntu"> JNTU </option> <option value="vit"> VIT </option> </select>
+          <button class="icon-btn" id="voiceBtn" title="Voice input" aria-label="Voice input">
+            <i class="ti ti-microphone"></i>
+          </button>
+          <button class="icon-btn" id="exportBtn" title="Export chat" aria-label="Export chat">
+            <i class="ti ti-download"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="messages-area" id="messagesArea" role="log" aria-live="polite" aria-label="Chat messages">
+        <!-- Messages rendered by JS -->
+      </div>
+
+      <div class="suggestions-bar" id="suggestionsBar"></div>
+
+      <footer class="input-area">
+        <div class="input-wrapper">
+          <textarea
+            id="chatInput"
+            class="chat-textarea"
+            placeholder="Ask anything about the college…"
+            rows="1"
+            aria-label="Type your message"
+          ></textarea>
+          <button class="send-btn" id="sendBtn" aria-label="Send message">
+            <i class="ti ti-send"></i>
+          </button>
+        </div>
+        <p class="input-hint">Press <kbd>Enter</kbd> to send · <kbd>Shift+Enter</kbd> for new line</p>
+      </footer>
+    </main>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+  <script src="src/data/faqs.js"></script>
+  <script src="src/data/suggestions.js"></script>
+  <script src="src/utils/markdown.js"></script>
+  <script src="src/utils/voice.js"></script>
+  <script src="src/utils/export.js"></script>
+  <script src="src/utils/storage.js"></script>
+  <script src="src/components/message.js"></script>
+  <script src="src/components/typing.js"></script>
+  <script src="src/components/suggestions.js"></script>
+  <script type="module" src="src/main.js"></script>
+  
+</body>
+</html>
